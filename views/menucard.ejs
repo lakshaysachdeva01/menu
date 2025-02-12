@@ -1,0 +1,643 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+<!-- Mirrored from html.rrdevs.net/zummi/food-menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Feb 2025 07:31:34 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="Zummi – Restaurant & Cafe Bootstrap HTML5 Template">
+    <meta name="author" content="ahmmedsabbirbd">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
+   
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+
+
+<!-- Body main wrapper start -->
+<main>
+    <!-- Breadcrumb area start  -->
+    <div class="breadcrumb__area breadcrumb__header-up breadcrumb-space overly overflow-hidden">
+        <div class="breadcrumb__bg"><img src="/assets/imgs/breadcrumb/breadcrumb.jpg" alt="image not found"></div>
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12">
+                    <div class="breadcrumb__content text-center">
+                        <div class="breadcrumb__shape-1 upDown"><img src="/assets/imgs/breadcrumb/shape-1.png" alt="image not found"></div>
+                        <div class="breadcrumb__shape-2 zooming2"><img src="/assets/imgs/breadcrumb/shape-2.png" alt="image not found"></div>
+                        <h1 class="breadcrumb__title mb-15 mb-sm-10 mb-xs-5 color-white " data-text-animation="fade-in-right" data-split="char" data-duration="0.9" data-stagger="0.09"><%= categoryname %></h1>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb area start  -->
+
+   
+    <section class="food-menu-tab food-menu-tab-2 overflow-hidden section-space-120" style="padding-top: 80px;">
+        <div class="container">
+            <style>
+                .sticky-header {
+                    position: fixed;
+                    top: 0;
+                    
+                    justify-content: center;
+                    width: 90%;
+                    background: white; /* Adjust background as needed */
+                    z-index: 1000;
+                    transition: top 0.3s;
+                }
+                @media (max-width:786px){
+                    .sticky-header {
+                        width: 100%;
+                    }
+                }
+                .placeholder {
+                    height: 120px; /* Adjust to match the header's height */
+                    display: none;
+                    background-color: transparent !important;
+                }
+            </style>
+            <!-- Toggle Switch -->
+
+
+            <style>
+                /* Custom Toggle Switch */
+                .custom-switch {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 10px;
+                    border-radius: 10px;
+                    background: #ffffff;
+                    width: 70px;
+                    justify-content: center;
+                    border: 1px solid #ddd;
+                }
+                
+                .custom-switch input {
+                    display: none;
+                }
+                
+                .custom-slider {
+                    position: relative;
+                    width: 40px;
+                    height: 18px;
+                    background: #ddd;
+                    border-radius: 12px;
+                    transition: 0.3s;
+                    display: flex;
+                    align-items: center;
+                    padding: 2px;
+                }
+                
+                /* Veg Image inside Toggle */
+                .toggle-icon {
+                    width: 25px;
+                    height: 25px;
+                    transition: 0.3s;
+                    position: absolute;
+                    left: -2px;
+                }
+                
+                /* When checked */
+                .custom-switch input:checked + .custom-slider {
+                    background: #118016;
+                }
+                
+                .custom-switch input:checked + .custom-slider .toggle-icon {
+                    transform: translateX(20px);
+                }
+                
+                /* Popup Styles */
+                .popup-overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1001;
+                    background: rgba(0, 0, 0, 0.5);
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                .popup-content {
+                    background: #fff;
+                    padding: 20px;
+                    border-radius: 8px;
+                    text-align: left;
+                    width: 300px;
+                }
+                
+                .popup-option {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                }
+                
+                #applyFilter {
+                    width: 100%;
+                    padding: 10px;
+                    background: #118016;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+                }
+                </style>
+            <!-- Toggle Switch -->
+
+            <style>
+                .food-menu-tab__nav-wrapper {
+                    width: 100%;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none; /* Hide scrollbar for Firefox */
+                }
+            
+                .food-menu-tab__nav-wrapper::-webkit-scrollbar {
+                    display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+                }
+            
+                .food-menu-tab__nav-tabs {
+                    display: flex; /* Ensures it behaves as a single row */
+                    width: max-content; /* Prevents line breaking */
+                }
+            
+                .nav {
+                    display: flex;
+                    flex-wrap: nowrap; /* Prevents buttons from wrapping */
+                    gap: 10px;
+                }
+            </style>
+
+<!-- Popup Modal -->
+<div id="menuFilterPopup" class="popup-overlay">
+    <div class="popup-content">
+        <h3>I want to see  </h3>
+        <label class="popup-option">
+            <input type="radio" name="menuFilter" value="all" checked> All Dishes
+        </label>
+        <label class="popup-option">
+            <input type="radio" name="menuFilter" value="veg"> Pure veg Dishes only
+        </label>
+        <button id="applyFilter">Show results</button>
+    </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menuToggle");
+    const menuFilterPopup = document.getElementById("menuFilterPopup");
+    const applyFilter = document.getElementById("applyFilter");
+    const filterOptions = document.querySelectorAll("input[name='menuFilter']");
+    
+    let selectedFilter = localStorage.getItem("selectedFilter") || "all";
+    
+    if (selectedFilter === "veg") {
+        menuToggle.checked = true;
+        filterVegDishes();
+    } else {
+        menuToggle.checked = false;
+        showAllDishes();
+    }
+    
+    menuToggle.addEventListener("change", function (event) {
+        if (!menuToggle.checked) {
+            showAllDishes();
+            localStorage.setItem("selectedFilter", "all");
+        } else {
+            menuFilterPopup.style.display = "flex";
+            event.preventDefault();
+            setTimeout(() => (menuToggle.checked = selectedFilter === "veg"), 0);
+        }
+    });
+    
+    applyFilter.addEventListener("click", function () {
+        let selectedOption = document.querySelector("input[name='menuFilter']:checked").value;
+        
+        if (selectedOption === "veg") {
+            filterVegDishes();
+            localStorage.setItem("selectedFilter", "veg");
+            menuToggle.checked = true;
+        } else {
+            showAllDishes();
+            localStorage.setItem("selectedFilter", "all");
+            menuToggle.checked = false;
+        }
+        
+        menuFilterPopup.style.display = "none";
+    });
+    
+    function showAllDishes() {
+        document.querySelectorAll(".food-menu-item").forEach(item => {
+            item.style.display = "block";
+        });
+        updateSuperSubVisibility();
+    }
+    
+    function filterVegDishes() {
+        document.querySelectorAll(".food-menu-item").forEach(item => {
+            let featureType = item.getAttribute("data-featureType");
+            if (featureType === "666a87cda9d9239927d47193") {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+        updateSuperSubVisibility();
+    }
+    
+    function updateSuperSubVisibility() {
+        document.querySelectorAll(".super-subcategory-section").forEach(section => {
+            let visibleItems = section.querySelectorAll(".food-menu-item:not([style*='display: none'])");
+            section.style.display = visibleItems.length === 0 ? "none" : "block";
+        });
+    }
+});
+</script>
+
+
+
+            <div class="placeholder"></div> <!-- Placeholder to prevent content shift -->
+            <div class="row sticky-section">
+                <div class="col-12" style="padding-top: 10px;">
+                    <div style="display: flex;">
+                    <div class="search-container text-center  " style="width: 100%;padding-bottom:8px ; margin-right:8px">
+                        <input type="text" style="border-radius: 15px; " id="searchInput" class="form-control mx-auto" placeholder="Search for a dish...">
+                    </div>
+                    <div class="menu-filter">
+                        <label class="custom-switch">
+                            <span id="menuFilterLabel">VEG</span>
+                            <input type="checkbox" id="menuToggle">
+                            <span class="custom-slider">
+                                <img src="/assets/imgs/veg.png" class="toggle-icon" alt="Veg">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                    <div class="food-menu-tab__nav-wrapper">
+                        <div class="food-menu-tab__nav-tabs">
+                            <nav class="nav" id="nav-tab" role="tablist">
+                                <button class="nav-link active" data-category="all">All</button>
+                                <% subcategory.forEach(item => { %>
+                                <button class="nav-link" data-category="<%= item._id %>"><%= item.name %></button>
+                                <% }) %>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var stickySection = document.querySelector(".sticky-section");
+                    var placeholder = document.querySelector(".placeholder");
+                    var searchInput = document.getElementById("searchInput");
+                    var offsetTop = stickySection.offsetTop;
+            
+                    // Sticky functionality
+                    window.addEventListener("scroll", function () {
+                        if (window.scrollY > offsetTop) {
+                            stickySection.classList.add("sticky-header");
+                            placeholder.style.display = "block"; // Prevents content jump
+                        } else {
+                            stickySection.classList.remove("sticky-header");
+                            placeholder.style.display = "none";
+                        }
+                    });
+            
+                    // Smooth scroll to top when search is focused
+                    searchInput.addEventListener("focus", function () {
+                        setTimeout(() => {
+                            stickySection.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }, 200); // Small delay to ensure focus event works smoothly
+                    });
+                });
+            </script>
+            
+            
+            
+            
+            <div class="tab-content" id="nav-tabContent" style="margin-top: 30px;">
+                <div class="tab-pane fade show active">
+                    <div class="row">
+    
+                        <% 
+                        let groupedProducts = {};
+                        products.forEach(item => {
+                            let subCategoryId = item.subCategory ? item.subCategory._id : "others";
+                            let subCategoryName = item.subCategory ? item.subCategory.name : "Others";
+                            let superSubId = item.superSubCategory ? item.superSubCategory._id : subCategoryId;
+                            let superSubName = item.superSubCategory ? item.superSubCategory.name : subCategoryName;
+    
+                            if (!groupedProducts[subCategoryId]) {
+                                groupedProducts[subCategoryId] = {};
+                            }
+    
+                            if (!groupedProducts[subCategoryId][superSubId]) {
+                                groupedProducts[subCategoryId][superSubId] = { name: superSubName, items: [] };
+                            }
+    
+                            groupedProducts[subCategoryId][superSubId].items.push(item);
+                        });
+                        %>
+                        <% Object.keys(groupedProducts).forEach(subCategoryId => { %>
+                            <div class="subcategory-section col-12" data-category="<%= subCategoryId %>">
+                                <% Object.keys(groupedProducts[subCategoryId]).forEach(superSubId => { %>
+                                    <div class="super-subcategory-section mb-4">
+                                        <h3 class="super-subcategory-title"><%= groupedProducts[subCategoryId][superSubId].name %></h3>
+                                        <div class="food-menu">
+                        
+                                            <!-- Left Column (48%) -->
+                                            <div class="left-menu">
+                                                <% groupedProducts[subCategoryId][superSubId].items.forEach((item, index) => { 
+                                                    if (index % 2 === 0) { // Left column
+                                                        let imageUrl = (item.arrays && item.arrays.arrayOne && item.arrays.arrayOne.length > 0) 
+                                                            ? process.env.S3_BASE_URL + item.arrays.arrayOne[0] 
+                                                            : null;
+                                                        
+                                                        let titleWords = item.title ? item.title.trim().split(" ") : [];
+                                                        let initials = titleWords.length > 1 
+                                                            ? titleWords[0][0] + titleWords[1][0] 
+                                                            : titleWords.length === 1 
+                                                                ? titleWords[0][0] 
+                                                                : "N";  
+                                                %>
+                                                <div class="food-menu-item col-xl-11 mb-30" 
+                                                data-category="<%= subCategoryId %>" 
+                                                data-featureType="<%= item.featureType %>">
+                                                        <div class="food-menu-tab__item">
+                                                            <div class="food-menu-tab__item-media">
+                                                                <% if (imageUrl) { %>
+                                                                    <img src="<%= imageUrl %>" class="img-fluid" alt="<%= initials.toUpperCase() %>">
+                                                                <% } else { %>
+                                                                    <div class="initials-box"><%= initials.toUpperCase() %></div>
+                                                                <% } %>
+                                                            </div>
+                                                            <div class="food-menu-tab__item-wrapper">
+                                                                <div class="food-menu-tab__item-text">
+                                                                    <div>
+                                                                    <h6><%= item.title %></h6>
+                                                                    <p> <%- item.description.replace(/<\/?span[^>]*>/g, '') %></p></div>
+                                                                    <div style="display: flex; flex-direction:column; min-width:30px; align-items:end">
+                                                                        <% if (item.numbers && item.numbers.numberOne) { %>
+                                                                            <span>₹<%= item.numbers.numberOne %></span>
+                                                                        <% } %>
+                                                                        
+                        
+                                                                    <!-- ADDITIONAL IMAGES BASED ON FEATURE TYPE -->
+                                                                    <% if (item.featureType === "666a87cda9d9239927d47193") { %>
+                                                                        <img style="width: 25px;height:25px; margin-top:20px" src="/assets/imgs/veg.png" class="additional-image img-fluid" alt="Image 1">
+                                                                    <% } else if (item.featureType === "666a87d5a9d9239927d471d2") { %>
+                                                                        <img style="width: 25px;height:25px;  margin-top:20px" src="/assets/imgs/non-veg.png" class="additional-image img-fluid" alt="Image 2">
+                                                                    <% } %>
+                                                                </div>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% } }) %>
+                                            </div>
+                        
+                                            <!-- Middle Border (4%) -->
+                                            <div class="middle-border"></div>
+                        
+                                            <!-- Right Column (48%) -->
+                                            <div class="right-menu">
+                                                <% groupedProducts[subCategoryId][superSubId].items.forEach((item, index) => { 
+                                                    if (index % 2 !== 0) { // Right column
+                                                        let imageUrl = (item.arrays && item.arrays.arrayOne && item.arrays.arrayOne.length > 0) 
+                                                            ? process.env.S3_BASE_URL + item.arrays.arrayOne[0] 
+                                                            : null;
+                                                        
+                                                        let titleWords = item.title ? item.title.trim().split(" ") : [];
+                                                        let initials = titleWords.length > 1 
+                                                            ? titleWords[0][0] + titleWords[1][0] 
+                                                            : titleWords.length === 1 
+                                                                ? titleWords[0][0] 
+                                                                : "N";  
+                                                %>
+                                                <div class="food-menu-item col-xl-11 mb-30" 
+                                                data-category="<%= subCategoryId %>" 
+                                                data-featureType="<%= item.featureType %>">
+                                                        <div class="food-menu-tab__item">
+                                                            <div class="food-menu-tab__item-media">
+                                                                <% if (imageUrl) { %>
+                                                                    <img src="<%= imageUrl %>" class="img-fluid" alt="<%= initials.toUpperCase() %>">
+                                                                <% } else { %>
+                                                                    <div class="initials-box"><%= initials.toUpperCase() %></div>
+                                                                <% } %>
+                                                            </div>
+                                                            <div class="food-menu-tab__item-wrapper">
+                                                                <div class="food-menu-tab__item-text">
+                                                                    <div>
+                                                                    <h6><%= item.title %></h6>
+                                                                    <p> <%- item.description.replace(/<\/?span[^>]*>/g, '') %></p></div>
+                                                                    <div style="display: flex; flex-direction:column; min-width:30px; align-items:end">
+                                                                        <% if (item.numbers && item.numbers.numberOne) { %>
+                                                                            <span>₹<%= item.numbers.numberOne %></span>
+                                                                        <% } %>
+                                                                        
+                        
+                                                                    <!-- ADDITIONAL IMAGES BASED ON FEATURE TYPE -->
+                                                                    <% if (item.featureType === "666a87cda9d9239927d47193") { %>
+                                                                        <img style="width: 25px;height:25px; margin-top:20px" src="/assets/imgs/veg.png" class="additional-image img-fluid" alt="Image 1">
+                                                                    <% } else if (item.featureType === "666a87d5a9d9239927d471d2") { %>
+                                                                        <img style="width: 25px;height:25px;  margin-top:20px" src="/assets/imgs/non-veg.png" class="additional-image img-fluid" alt="Image 2">
+                                                                    <% } %>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% } }) %>
+                                            </div>
+                        
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        <% }) %>
+                        <script>
+                            function filterMenu(category) {
+                                const foodMenu = document.querySelector('.food-menu');
+                                const items = document.querySelectorAll('.food-menu-item');
+                            
+                                items.forEach(item => {
+                                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                                        item.style.display = 'block';
+                                    } else {
+                                        item.style.display = 'none';
+                                    }
+                                });
+                            
+                                // **Trigger reflow to fix layout misalignment**
+                                foodMenu.style.display = 'none';
+                                setTimeout(() => {
+                                    foodMenu.style.display = 'flex';
+                                }, 10);
+                            }
+                            
+                        </script>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".nav-link");
+        const items = document.querySelectorAll(".food-menu-item");
+        const sections = document.querySelectorAll(".subcategory-section");
+        const searchInput = document.getElementById("searchInput");
+        const superSubcategoryTitles = document.querySelectorAll(".super-subcategory-title");
+    
+        // Category Filtering
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const category = this.getAttribute("data-category");
+    
+                buttons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+    
+                sections.forEach(section => section.style.display = "none");
+    
+                if (category === "all") {
+                    sections.forEach(section => section.style.display = "block");
+                } else {
+                    sections.forEach(section => {
+                        if (section.getAttribute("data-category") === category) {
+                            section.style.display = "block";
+                        }
+                    });
+                }
+            });
+        });
+    
+        // Search Functionality
+        searchInput.addEventListener("input", function () {
+            const query = searchInput.value.toLowerCase();
+            let hasResults = false;
+    
+            items.forEach(item => {
+                const title = item.querySelector("h6").textContent.toLowerCase();
+                if (title.includes(query)) {
+                    item.style.display = "block";
+                    hasResults = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+    
+            // Hide the super subcategory titles when searching
+            superSubcategoryTitles.forEach(title => {
+                title.style.display = query ? "none" : "block";
+            });
+    
+            // Hide empty sections
+            sections.forEach(section => {
+                const visibleItems = section.querySelectorAll(".food-menu-item[style='display: block;']");
+                section.style.display = visibleItems.length > 0 ? "block" : "none";
+            });
+        });
+    });
+    
+ </script>
+
+    
+</main>
+<style>
+    .food-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .left-menu, .right-menu {
+        width: 48%;
+    }
+
+    .middle-border {
+        width: 4%;
+        border-left: 2px dashed #ccc;
+    }
+
+    .food-menu-tab__item-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 120px;
+        max-width: 120px; /* Fixed width */
+        height: 120px; /* Fixed height */
+        background-color: #ffd4b22b; /* Background color */
+        border-radius: 500px; /* Rounded corners */
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .food-menu-tab__item-media img {
+        max-width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .initials-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 40px; 
+        color: #704828;
+        text-transform: uppercase;
+    }
+</style>
+<style>
+    .super-subcategory-title{
+        padding-bottom: 35px;
+    }
+    @media (max-width:1018px) {
+        .left-menu,.right-menu{
+            width:100% !important;
+        }
+    }
+    @media (max-width:575px) {
+        .food-menu-tab{
+            padding-top: 0px !important;
+        }
+        .food-menu-tab__nav-wrapper{
+            padding-top: 0 !important;
+        }
+    }
+</style>
+<!-- Body main wrapper end -->
+
+<!-- JS here -->
+<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
